@@ -17,7 +17,7 @@ def Enter_inbetween(data):
     stop_time = data['created_at']
 
     diff = datetime.strptime(stop_time, '%Y-%m-%dT%H:%M:%S.%f%z') - datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S%z')
-    dur = int(diff.total_seconds())
+    dur = int(diff.total_seconds)
 
 
 
