@@ -1,6 +1,7 @@
 from flask import Flask, request, json
 import requests
 from base64 import b64encode
+from datetime import datetime
 
 response_counter = 0
 
@@ -12,10 +13,12 @@ def Enter_inbetween(data):
     if Not_run():
         return 0
 
-    print('bruv')
-    stop_time = data['created_at']
     start_time = Find_staring_time()
-    print(stop_time - start_time)
+    stop_time = data['created_at']
+
+    diff = datetime.strptime(stop_time, '%Y-%m-%dT%H:%M:%S.%f%z') - datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S%z')
+    dur = int(diff.total_seconds())
+
 
 
     time_entry_details = {
@@ -26,6 +29,7 @@ def Enter_inbetween(data):
         "billable": False,
         "start": start_time,
         "stop": stop_time,
+        "duration": dur,
         "description": "Inbetween",
         "duronly": False,
         "at": "2022-07-13T17:47:28+00:00",
